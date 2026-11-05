@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UpToDate Expert AI</title>
+<meta name="description" content="AI สนับสนุนการตัดสินใจทางคลินิกที่ออกแบบมาเพื่อการปฏิบัติงานทางคลินิกโดยเฉพาะ">
+
+<link rel="icon" type="image/png" href="../favicon.png?v=20261105">
+<link rel="icon" type="image/svg+xml" sizes="any" href="../favicon.svg?v=20261105">
+
+
+<style>
+@font-face{font-family:"Noto Sans Thai";src:url("../fonts/NotoSansThai-Regular.ttf") format("truetype");font-weight:100 500;font-style:normal;font-display:swap}
+@font-face{font-family:"Noto Sans Thai";src:url("../fonts/NotoSansThai-Bold.ttf") format("truetype");font-weight:600 900;font-style:normal;font-display:swap}
+  :root{
+    --ink:#1f2124;
+    --muted:#7d8085;
+    --line:#e6e7ea;
+    --bg:#ffffff;
+    --panel:#f6f7f9;
+    --blue:#0091d5;
+    --green:#78be21;
+    --red:#e2231a;
+    --accent:#0091d5;
+    --radius:14px;
+  }
+
+  *{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+  }
+
+  html{
+    -webkit-text-size-adjust:100%;
+  }
+
+  body{
+    font-family:"Noto Sans Thai",Tahoma,-apple-system,BlinkMacSystemFont,sans-serif;
+    color:var(--ink);
+    background:var(--bg);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  .wrap{
+    max-width:520px;
+    margin:0 auto;
+    padding:40px 24px 56px;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .logo{
+    display:block;
+    width:100%;
+    max-width:312px;
+    height:auto;
+    margin:8px 0 4px;
+    animation:rise .6s cubic-bezier(.2,.7,.3,1) both;
+  }
+
+  .rule{
+    display:flex;
+    gap:5px;
+    justify-content:flex-start;
+    margin:18px 0 22px;
+  }
+
+  .rule span{
+    width:26px;
+    height:4px;
+    border-radius:2px;
+  }
+
+  .rule .g{background:var(--green)}
+  .rule .r{background:var(--red)}
+  .rule .b{background:var(--blue)}
+  .rule .k{background:var(--ink)}
+
+  .hero{
+    text-align:left;
+    padding:26px 4px 30px;
+    animation:rise .6s cubic-bezier(.2,.7,.3,1) .08s both;
+  }
+
+  .hero .lead{
+    font-size:18px;
+    font-weight:500;
+    color:var(--ink);
+    letter-spacing:0;
+    line-height:1.55;
+  }
+
+  .hero .lead .en{
+    font-family:"Noto Sans Thai",Tahoma,sans-serif;
+    font-weight:600;
+  }
+
+  .hero .sub{
+    margin-top:14px;
+    font-size:13.5px;
+    color:#5a5d62;
+    font-weight:400;
+    line-height:1.6;
+  }
+
+  .hero .sub b{
+    font-weight:600;
+    color:var(--ink);
+  }
+
+  .steps-label{
+    font-family:"Noto Sans Thai",Tahoma,sans-serif;
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:0;
+    text-transform:uppercase;
+    color:var(--muted);
+    text-align:left;
+    margin-bottom:18px;
+    animation:rise .6s cubic-bezier(.2,.7,.3,1) .16s both;
+  }
+
+  .steps{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    animation:rise .6s cubic-bezier(.2,.7,.3,1) .2s both;
+  }
+
+  .step{
+    display:flex;
+    gap:14px;
+    align-items:flex-start;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:15px 16px;
+  }
+
+  .step .n{
+    flex:0 0 auto;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    font-family:"Noto Sans Thai",Tahoma,sans-serif;
+    font-weight:600;
+    font-size:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:1px;
+  }
+
+  .step .body{
+    flex:1 1 auto;
+    min-width:0;
+  }
+
+  .step .t{
+    font-size:15px;
+    font-weight:500;
+    color:var(--ink);
+    line-height:1.5;
+  }
+
+  .step .t a{
+    color:var(--accent);
+    text-decoration:none;
+    font-weight:600;
+    border-bottom:1px solid rgba(0,145,213,.35);
+  }
+
+  .step .note{
+    margin-top:5px;
+    font-size:12.5px;
+    color:var(--red);
+    font-weight:500;
+    line-height:1.45;
+  }
+
+  /* App Store / Google Play badges */
+  .store-badges{
+    width:100%;
+    margin:30px 0 8px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    align-items:center;
+    animation:rise .6s cubic-bezier(.2,.7,.3,1) .26s both;
+  }
+
+  .store-badges a{
+    width:100%;
+    height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    line-height:0;
+    text-decoration:none;
+    background:transparent;
+    border:0;
+    padding:0;
+    margin:0;
+    border-radius:0;
+    box-shadow:none;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+
+  .store-badges a:hover{
+    transform:translateY(-2px);
+    opacity:.92;
+  }
+
+  .store-badges a:active{
+    transform:translateY(0);
+  }
+
+  .store-badges img{
+    display:block;
+    width:100%;
+    max-width:170px;
+    height:48px;
+    object-fit:contain;
+    border:0;
+    background:transparent;
+    box-shadow:none;
+  }
+
+  .store-badges a:last-child img{height:63px;max-width:170px}
+
+  .contact{
+    padding-top:22px;
+    text-align:left;
+    animation:rise .6s cubic-bezier(.2,.7,.3,1) .3s both;
+  }
+
+  .contact .lbl{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:4px;
+  }
+
+  .contact a{
+    font-family:"Noto Sans Thai",Tahoma,sans-serif;
+    font-size:15px;
+    font-weight:500;
+    color:var(--ink);
+    text-decoration:none;
+    border-bottom:1px solid var(--line);
+    padding-bottom:2px;
+    transition:color .15s, border-color .15s;
+  }
+
+  .contact a:hover{
+    color:var(--accent);
+    border-color:var(--accent);
+  }
+
+  .foot{
+    margin-top:26px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    font-size:11.5px;
+    color:#aab;
+    font-family:"Noto Sans Thai",Tahoma,sans-serif;
+    letter-spacing:.02em;
+  }
+
+  .foot span{
+    flex:0 1 auto;
+  }
+
+  .foot .wk{
+    height:22px;
+    width:auto;
+    flex:0 0 auto;
+    opacity:.9;
+  }
+
+  @keyframes rise{
+    from{
+      opacity:0;
+      transform:translateY(14px);
+    }
+    to{
+      opacity:1;
+      transform:translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{
+      animation:none!important;
+    }
+  }
+
+  @media (max-width:480px){
+    .pc-br{
+      display:none;
+    }
+
+    .store-badges{
+      gap:14px;
+    }
+
+    .store-badges a{
+      height:44px;
+    }
+
+    .store-badges a:last-child img{height:58px;max-width:155px}
+
+    .store-badges img{
+      max-width:155px;
+      height:44px;
+    }
+  }
+
+  @media (max-width:380px){
+    .wrap{
+      padding:32px 18px 44px;
+    }
+
+    .hero .lead{
+      font-size:16.5px;
+    }
+
+    .store-badges{
+      gap:10px;
+    }
+
+    .store-badges a{
+      height:38px;
+    }
+
+    .store-badges a:last-child img{height:50px;max-width:138px}
+
+    .store-badges img{
+      max-width:138px;
+      height:38px;
+    }
+
+    .contact a{
+      font-size:14px;
+    }
+
+    .foot{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:10px;
+    }
+  }
+</style>
+</head>
+
+<body>
+  <main class="wrap">
+
+    <img class="logo" src="logo.png?v=11" alt="UpToDate Expert AI">
+
+    <div class="rule" aria-hidden="true">
+      <span class="g"></span>
+      <span class="r"></span>
+      <span class="b"></span>
+      <span class="k"></span>
+    </div>
+
+    <section class="hero">
+      <p class="lead">
+        เข้าถึงแหล่งอ้างอิงมาตรฐานสูงสุดจาก <span class="en">UpToDate</span><br class="pc-br">
+        ได้รวดเร็วและชัดเจนยิ่งขึ้นด้วย AI<br class="pc-br">
+        ที่ออกแบบมาเพื่อการปฏิบัติงานทางคลินิกโดยเฉพาะ
+      </p>
+
+      <p class="sub">
+        UpToDate Expert AI เป็น AI สนับสนุนการตัดสินใจทางคลินิก<br class="pc-br">
+        ที่ตอบคำถามโดยใช้ <b>เฉพาะเนื้อหาจาก UpToDate</b>
+      </p>
+    </section>
+
+    <p class="steps-label">เริ่มต้นใช้งาน</p>
+
+    <ol class="steps">
+      <li class="step">
+        <span class="n">1</span>
+        <div class="body">
+          <div class="t">
+            ใช้คอมพิวเตอร์ที่เชื่อมต่อกับเครือข่ายของสถาบัน เข้าเว็บไซต์
+            <a href="https://www.uptodate.com" target="_blank" rel="noopener">uptodate.com</a>
+            และลงทะเบียน
+          </div>
+          <div class="note">ต้องยืนยันสิทธิ์ผ่าน IP ของสถาบัน โปรดดำเนินการขั้นตอนนี้ภายในสถาบัน</div>
+        </div>
+      </li>
+
+      <li class="step">
+        <span class="n">2</span>
+        <div class="body">
+          <div class="t">ดาวน์โหลดแอป</div>
+        </div>
+      </li>
+
+      <li class="step">
+        <span class="n">3</span>
+        <div class="body">
+          <div class="t">เข้าสู่ระบบและใช้งานได้ทุกที่</div>
+        </div>
+      </li>
+    </ol>
+
+    <div class="store-badges">
+      <a href="https://apps.apple.com/th/app/uptodate-expert-ai/id6756627759?l=th" target="_blank" rel="noopener" aria-label="ดาวน์โหลดบน App Store">
+        <img src="app_store_th.svg?v=1" alt="ดาวน์โหลดบน App Store">
+      </a>
+
+      <a href="https://play.google.com/store/apps/details?id=com.uptodate.expertai&amp;hl=th&amp;gl=TH" target="_blank" rel="noopener" aria-label="ดาวน์โหลดจาก Google Play">
+        <img src="google_play_th.png?v=1" alt="ดาวน์โหลดจาก Google Play">
+      </a>
+    </div>
+
+    <section class="contact">
+      <p class="lbl">สอบถามการใช้งาน / การสาธิตสำหรับแผนก</p>
+      <a href="mailto:Jiseong.Kim@WoltersKluwer.com">Jiseong.Kim@WoltersKluwer.com</a>
+
+      <div class="foot">
+        <span>Wolters Kluwer Health · Clinical Effectiveness</span>
+        <img class="wk" src="wk_logo.png?v=11" alt="Wolters Kluwer Health">
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
+

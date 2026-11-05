@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="ตัวอย่างคำถามทางคลินิกสำหรับ UpToDate Expert AI แยกตามสาขา ฉบับภาษาไทย">
+<title>UpToDate Expert AI · ตัวอย่างการใช้งานแยกตามสาขา</title>
+<link rel="icon" type="image/png" href="./favicon.png?v=20261105">
+<link rel="icon" type="image/svg+xml" sizes="any" href="./favicon.svg?v=20261105">
+
+<style>
+@font-face{font-family:"Noto Sans Thai";src:url("./fonts/NotoSansThai-Regular.ttf") format("truetype");font-weight:100 500;font-style:normal;font-display:swap}
+@font-face{font-family:"Noto Sans Thai";src:url("./fonts/NotoSansThai-Bold.ttf") format("truetype");font-weight:600 900;font-style:normal;font-display:swap}
+:root{
+  --blue:#0357A6;
+  --wk-blue:#007AC3;
+  --wk-blue-dark:#00669F;
+  --wk-green:#5B8116;
+  --wk-green-dark:#4E6F12;
+  --blue-deep:#03427E;
+  --blue-tint:#EDF4FB;
+  --ink:#1B2129;
+  --sub:#5B6572;
+  --line:#E4E9F0;
+  --paper:#F7F9FC;
+  --white:#FFFFFF;
+  --ok:#1B7F4D;
+  --radius:10px;
+  font-size:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Sans Thai",Tahoma,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);background:var(--white);line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  word-break:normal;overflow-wrap:break-word;
+}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* ---------- header ---------- */
+.site-head{border-bottom:1px solid var(--line);background:var(--white)}
+.site-head-inner{max-width:1060px;margin:0 auto;padding:40px 24px 34px}
+.eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.brand-logo{display:block;height:58px;width:auto;margin-bottom:18px}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.cta{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:6px;
+  font-size:.92rem;font-weight:700;color:#fff;letter-spacing:0;line-height:1.5;text-align:center;
+  transition:background-color .15s,transform .08s}
+.cta:hover{color:#fff;text-decoration:none}
+.cta:active{transform:translateY(1px)}
+.cta-blue{background:var(--wk-blue)}
+.cta-blue:hover{background:var(--wk-blue-dark)}
+.cta-green{background:var(--wk-green)}
+.cta-green:hover{background:var(--wk-green-dark)}
+h1{font-size:1.9rem;font-weight:800;letter-spacing:0;line-height:1.5}
+.lede{margin-top:12px;color:var(--sub);font-size:.98rem;max-width:34em;line-height:1.7}
+
+/* ---------- chip nav ---------- */
+.chipbar{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.chipbar-wrap{position:relative;max-width:1060px;margin:0 auto;display:flex;align-items:flex-start;gap:8px;padding:10px 24px}
+.chipbar-inner{min-width:0;flex:1;display:flex;gap:8px;flex-wrap:wrap}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:var(--white);color:var(--sub);border-radius:999px;padding:6px 14px;font-size:.85rem;font-weight:600;transition:all .15s}
+.expert-ai-link{text-decoration:none;display:inline-flex;align-items:center;background:var(--blue);border-color:var(--blue);color:#fff;white-space:nowrap}
+.chip.expert-ai-link:hover{background:var(--blue-deep);border-color:var(--blue-deep);color:#fff}
+.case-title{font-size:.84rem;color:var(--sub);margin-bottom:6px}
+.chip:hover{border-color:var(--blue);color:var(--blue)}
+.chip.active{background:var(--blue);border-color:var(--blue);color:#fff}
+
+/* ---------- cases ---------- */
+main{max-width:1060px;margin:0 auto;padding:12px 24px 40px}
+.spec-section{padding:34px 0 6px;border-bottom:1px solid var(--line)}
+.spec-section:last-of-type{border-bottom:none}
+.spec-title{font-size:1.05rem;font-weight:800;color:var(--blue);letter-spacing:0;scroll-margin-top:64px}
+.case{margin-top:20px}
+.case + .case{margin-top:30px;padding-top:26px;border-top:1px dashed var(--line)}
+.vignette{font-weight:700;font-size:.98rem;line-height:1.78;letter-spacing:0;white-space:pre-line}
+.qlist{list-style:none;margin:14px 0 18px}
+.case-note{margin:0 0 4px;padding:10px 14px;border-left:3px solid #C9D3DF;background:var(--paper);border-radius:0 6px 6px 0;font-size:.85rem;color:var(--sub);line-height:1.7;max-width:44em}
+.qitem{display:flex;align-items:flex-start;gap:10px;padding:7px 0 7px 6px}
+.qitem::before{content:"";flex:0 0 auto;width:6px;height:6px;border-radius:50%;background:var(--ink);margin-top:.6em}
+.qtext{flex:1;font-size:.95rem;color:var(--ink)}
+.qlabel{font-weight:700}
+.copy-btn{flex:0 0 auto;border:1px solid var(--line);background:var(--white);color:var(--sub);border-radius:6px;padding:3px 10px;font-size:.76rem;font-weight:600;transition:all .15s;margin-top:1px}
+.copy-btn:hover{border-color:var(--blue);color:var(--blue)}
+.copy-btn.done{border-color:var(--ok);color:var(--ok)}
+
+/* ---------- guide box ---------- */
+.guide{background:var(--blue-tint);border:1px solid #D3E4F5;border-radius:var(--radius);padding:20px 24px;margin:38px 0 8px;font-size:.93rem;line-height:1.75;color:#2A445F;max-width:52em}
+
+/* ---------- share section ---------- */
+.share{background:var(--paper);border-top:1px solid var(--line);margin-top:24px}
+.share-inner{max-width:1060px;margin:0 auto;padding:44px 24px 52px}
+.share h2{font-size:1.3rem;font-weight:800;letter-spacing:0}
+.share .sub{color:var(--sub);font-size:.92rem;margin-top:8px;max-width:34em;line-height:1.7}
+.share-actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:8px;padding:10px 18px;font-size:.9rem;font-weight:700;border:1px solid transparent;transition:all .15s}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-deep);text-decoration:none}
+.btn-ghost{background:var(--white);color:var(--blue);border-color:var(--line)}
+.btn-ghost:hover{border-color:var(--blue);text-decoration:none}
+.share-note{margin-top:18px;font-size:.83rem;color:#8A94A2;max-width:38em;line-height:1.7}
+.nb{white-space:nowrap}
+.linklike{background:none;border:none;padding:0;font-size:inherit;font-family:inherit;color:#6B7684;font-weight:600;text-decoration:underline;text-underline-offset:2px;text-decoration-color:#C4CBD4}
+.linklike:hover{color:var(--blue);text-decoration-color:var(--blue)}
+.linklike.done{color:var(--ok);text-decoration-color:var(--ok)}
+
+/* ---------- footer / admin ---------- */
+footer{border-top:1px solid var(--line);background:var(--white)}
+.foot-inner{max-width:1060px;margin:0 auto;padding:26px 24px 30px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;font-size:.83rem;color:var(--sub);flex-wrap:wrap}
+.foot-contact p{line-height:1.7}
+.foot-label{font-weight:700;color:var(--ink);letter-spacing:.02em;margin-bottom:2px}
+.admin-link{background:none;border:none;color:#8A94A2;font-size:.8rem;text-decoration:underline}
+.admin-link:hover{color:var(--blue)}
+
+/* ---------- admin modal ---------- */
+.modal-back{position:fixed;inset:0;background:rgba(20,28,40,.45);display:none;align-items:flex-start;justify-content:center;z-index:100;overflow-y:auto;padding:5vh 16px}
+.modal-back.open{display:flex}
+.modal{background:var(--white);border-radius:14px;max-width:640px;width:100%;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.modal h3{font-size:1.15rem;font-weight:800}
+.modal .hint{font-size:.83rem;color:var(--sub);margin-top:6px;line-height:1.6}
+.field{margin-top:16px}
+.field label{display:block;font-size:.82rem;font-weight:700;margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:.9rem;font-family:inherit;background:var(--white);color:var(--ink)}
+.field textarea{min-height:110px;resize:vertical;line-height:1.6}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--blue)}
+.tabs{display:flex;gap:6px;margin-top:20px;border-bottom:1px solid var(--line)}
+.tab{background:none;border:none;padding:8px 14px;font-size:.86rem;font-weight:700;color:var(--sub);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab.active{color:var(--blue);border-bottom-color:var(--blue)}
+.tabpane{display:none;padding-top:4px}
+.tabpane.active{display:block}
+.modal-foot{margin-top:22px;display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap}
+.status{margin-top:14px;font-size:.84rem;border-radius:8px;padding:10px 14px;display:none}
+.status.ok{display:block;background:#EAF6EF;color:var(--ok)}
+.status.err{display:block;background:#FCEEEE;color:#B4232A;word-break:break-word}
+.manage-list{margin-top:14px;max-height:260px;overflow-y:auto;border:1px solid var(--line);border-radius:8px}
+.manage-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 12px;font-size:.83rem;border-bottom:1px solid var(--line)}
+.manage-row:last-child{border-bottom:none}
+.manage-row .v{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.del-btn{border:1px solid var(--line);background:var(--white);color:#B4232A;border-radius:6px;padding:3px 10px;font-size:.76rem;font-weight:600}
+.del-btn:hover{border-color:#B4232A}
+.q-row{display:grid;grid-template-columns:130px 1fr;gap:8px;margin-top:8px}
+
+@media (max-width:640px){
+  h1{font-size:1.5rem}
+  .site-head-inner{padding:30px 18px 22px}
+  main,.chipbar-wrap,.share-inner,.foot-inner{padding-left:18px;padding-right:18px}
+  .cta-row{flex-direction:column;gap:8px}
+  .cta{width:100%;padding:13px 18px}
+  .chipbar-inner{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-right:34px}
+  .chipbar-inner::-webkit-scrollbar{display:none}
+  .chipbar-wrap::after{content:"";position:absolute;top:0;right:0;width:34px;height:100%;pointer-events:none;
+    background:linear-gradient(to right,rgba(255,255,255,0),rgba(255,255,255,.96))}
+  .qitem{flex-wrap:wrap}
+  .copy-btn{margin-left:16px}
+  .q-row{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="site-head-inner">
+    <img class="brand-logo" src="logo.png" alt="UpToDate Expert AI" width="352" height="120">
+    <h1>ตัวอย่างการใช้งานแยกตามสาขา</h1>
+    <p class="lede">ตัวอย่างคำถามเหล่านี้อ้างอิงจากสถานการณ์ทางคลินิกที่พบในการปฏิบัติงานจริง ใช้ปุ่ม <b>คัดลอก</b> ข้างคำถามแต่ละข้อเพื่อคัดลอกคำถามและนำไปป้อนใน Expert AI ได้โดยตรง</p>
+    <div class="cta-row">
+      <a class="cta cta-blue" href="https://www.uptodate.com/contents/search" target="_blank" rel="noopener">เปิด UpToDate Expert AI</a>
+      <a class="cta cta-green" href="./mobile/" target="_blank" rel="noopener">ดาวน์โหลดแอป Expert AI</a>
+    </div>
+  </div>
+</header>
+
+<nav class="chipbar" aria-label="ไปยังสาขาที่ต้องการ">
+  <div class="chipbar-wrap">
+    <a class="chip expert-ai-link" href="https://ai.uptodate.com/" target="_blank" rel="noopener noreferrer" aria-label="Expert AI (เปิดในแท็บใหม่)">Expert AI ↗</a>
+    <div class="chipbar-inner" id="chipbar"></div>
+  </div>
+</nav>
+
+<main id="caseRoot" aria-live="polite"></main>
+
+<section class="share" id="share">
+  <div class="share-inner">
+    <h2>แบ่งปันคำถามและข้อเสนอแนะ</h2>
+    <p class="sub">ส่งคำถามที่คุณพบว่ามีประโยชน์ในการปฏิบัติงานทางคลินิก หรือข้อเสนอแนะเพื่อปรับปรุงประสบการณ์การใช้งาน คำถามที่ส่งมาจะได้รับการพิจารณาเพื่อนำมาเพิ่มในตัวอย่างข้างต้น</p>
+    <div class="share-actions">
+      <a class="btn btn-primary" id="sharePromptBtn" href="#">แบ่งปันคำถาม</a>
+      <a class="btn btn-ghost" id="feedbackBtn" href="#">ส่งข้อเสนอแนะ</a>
+    </div>
+    <p class="share-note">หากปุ่มไม่เปิดร่างอีเมล โปรดส่งอีเมลไปที่ <span class="nb"><button class="linklike" id="copyMail">jiseong.kim@wolterskluwer.com</button></span>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <div class="foot-contact">
+      <p class="foot-label">ติดต่อ</p>
+      <p>Jiseong Kim, Wolters Kluwer ประเทศเกาหลี</p>
+      <p>อีเมล : <a href="mailto:jiseong.kim@wolterskluwer.com">jiseong.kim@wolterskluwer.com</a></p>
+    </div>
+    <button class="admin-link" id="adminOpen">ผู้ดูแลระบบ</button>
+  </div>
+</footer>
+
+<!-- ===== Admin modal ===== -->
+<div class="modal-back" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+  <div class="modal">
+    <h3 id="adminTitle">ผู้ดูแลระบบ · จัดการกรณีศึกษา</h3>
+    <p class="hint">การเปลี่ยนแปลงจะถูกบันทึกโดยตรงลงใน <code>cases.json</code> ของที่เก็บโค้ดนี้ ต้องใช้โทเค็นการเข้าถึงส่วนบุคคลแบบ fine-grained ที่มีสิทธิ์ <b>Contents: Read &amp; Write</b> ระบบจะไม่จัดเก็บโทเค็น และจะล้างโทเค็นเมื่อปิดหน้าต่างนี้</p>
+
+    <div class="field">
+      <label for="ghToken">โทเค็นการเข้าถึงส่วนบุคคลของ GitHub</label>
+      <input type="password" id="ghToken" placeholder="github_pat_..." autocomplete="off">
+    </div>
+
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-tab="addCase" role="tab">เพิ่มกรณีศึกษา</button>
+      <button class="tab" data-tab="addSpec" role="tab">เพิ่มสาขา</button>
+      <button class="tab" data-tab="manage" role="tab">ลบ / จัดการ</button>
+    </div>
+
+    <div class="tabpane active" id="pane-addCase">
+      <div class="field">
+        <label for="caseSpec">สาขา</label>
+        <select id="caseSpec"></select>
+      </div>
+      <div class="field">
+        <label for="caseVignette">กรณีศึกษา (ข้อมูลผู้ป่วย)</label>
+        <textarea id="caseVignette" placeholder="ตัวอย่าง: ชายอายุ 68 ปี มีประวัติความดันโลหิตสูง มีอาการเจ็บหน้าอกรุนแรงเฉียบพลันนาน 40 นาที..."></textarea>
+      </div>
+      <div class="field">
+        <label for="caseNote">หมายเหตุ (ไม่บังคับ)</label>
+        <input type="text" id="caseNote" placeholder="ตัวอย่าง: กรณีศึกษานี้จงใจระบุข้อมูลตั้งต้นที่ไม่ถูกต้อง">
+      </div>
+      <div class="field">
+        <label>คำถาม</label>
+        <div id="qRows"></div>
+        <button class="btn btn-ghost" id="addQRow" type="button" style="margin-top:10px;padding:6px 12px;font-size:.82rem">+ เพิ่มคำถาม</button>
+      </div>
+    </div>
+
+    <div class="tabpane" id="pane-addSpec">
+      <div class="field">
+        <label for="specName">ชื่อสาขา</label>
+        <input type="text" id="specName" placeholder="ตัวอย่าง: อายุรศาสตร์โรคหัวใจ">
+      </div>
+      <p class="hint">สาขาใหม่จะแสดงบนหน้าเว็บเมื่อมีกรณีศึกษาอย่างน้อยหนึ่งกรณี</p>
+    </div>
+
+    <div class="tabpane" id="pane-manage">
+      <p class="hint">หลังจากคลิกลบ ให้คลิก <b>บันทึก (Commit)</b> ด้านล่างเพื่อบันทึกการเปลี่ยนแปลง</p>
+      <div class="manage-list" id="manageList"></div>
+    </div>
+
+    <div class="status" id="adminStatus"></div>
+
+    <div class="modal-foot">
+      <button class="btn btn-ghost" id="adminClose">ปิด</button>
+      <button class="btn btn-primary" id="adminSave">บันทึก (Commit)</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   CONFIG — Edit manually if repository details are not detected after deployment
+   ========================================================= */
+const CONFIG = {
+  owner: "icannotcodejustHCI",
+  repo:  "EAI-Prompts-Thai",
+  branch: "main",
+  casesPath: "cases.json"
+};
+
+(function deriveRepo(){
+  if (CONFIG.owner && CONFIG.repo) return;
+  const h = location.hostname, p = location.pathname.split("/").filter(Boolean);
+  if (h.endsWith(".github.io")) {
+    CONFIG.owner = CONFIG.owner || h.replace(".github.io","");
+    CONFIG.repo  = CONFIG.repo  || (p[0] || CONFIG.owner + ".github.io");
+  }
+})();
+
+const API = "https://api.github.com";
+let DATA = null;          // {specialties, cases}
+let PENDING = null;       // Working copy for admin edits
+let FILE_SHA = null;
+let SAVING = false;
+
+/* ---------- Load data ---------- */
+async function loadData(){
+  try{
+    const r = await fetch(CONFIG.casesPath + "?t=" + Date.now());
+    if(!r.ok) throw new Error(r.status);
+    DATA = await r.json();
+  }catch(e){
+    document.getElementById("caseRoot").innerHTML =
+      '<p style="padding:40px 0;color:var(--sub)">ไม่สามารถโหลด cases.json ได้ โปรดตรวจสอบว่ามีไฟล์นี้อยู่ในที่เก็บโค้ด</p>';
+    return;
+  }
+  renderAll();
+}
+
+/* ---------- Rendering ---------- */
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+function renderAll(){
+  const root = document.getElementById("caseRoot");
+  const chipbar = document.getElementById("chipbar");
+  root.innerHTML = ""; chipbar.innerHTML = "";
+
+  const specs = DATA.specialties.filter(s => DATA.cases.some(c => c.specialtyId === s.id));
+
+  // All chip
+  const allChip = document.createElement("button");
+  allChip.className = "chip active"; allChip.textContent = "ทั้งหมด";
+  allChip.onclick = () => filterSpec(null, allChip);
+  chipbar.appendChild(allChip);
+
+  specs.forEach(spec => {
+    const chip = document.createElement("button");
+    chip.className = "chip"; chip.textContent = spec.name;
+    chip.onclick = () => filterSpec(spec.id, chip);
+    chipbar.appendChild(chip);
+
+    const sec = document.createElement("section");
+    sec.className = "spec-section"; sec.dataset.spec = spec.id;
+    sec.innerHTML = '<h2 class="spec-title" id="spec-' + esc(spec.id) + '">' + esc(spec.name) + '</h2>';
+
+    DATA.cases.filter(c => c.specialtyId === spec.id).forEach(c => {
+      const div = document.createElement("div");
+      div.className = "case";
+      let qhtml = "";
+      (c.questions||[]).forEach(q => {
+        const full = (c.vignette ? c.vignette + "\n\n" : "") + q.text;
+        qhtml += '<li class="qitem">' +
+          '<span class="qtext"><span class="qlabel">' + esc(q.label) + ':</span> ' + esc(q.text) + '</span>' +
+          '<button class="copy-btn" data-copy="' + esc(full) + '">คัดลอก</button></li>';
+      });
+      div.innerHTML = (c.title ? '<p class="case-title">' + esc(c.title) + '</p>' : '') + '<p class="vignette">'  + esc(c.vignette) + '</p><ul class="qlist">' + qhtml + '</ul>';
+      sec.appendChild(div);
+    });
+    root.appendChild(sec);
+  });
+
+  const guide = document.createElement("div");
+  guide.className = "guide";
+  guide.innerHTML = "ลองป้อนคำถามตัวอย่างข้างต้นตามที่เขียนไว้ หรือทดลองใช้ Expert AI กับกรณีศึกษาที่คุณพบในการปฏิบัติงานทางคลินิก ส่งข้อเสนอแนะเพื่อปรับปรุงการใช้งานผ่านส่วน <a href='#share'>แบ่งปันคำถามและข้อเสนอแนะ</a> ด้านล่าง";
+  root.appendChild(guide);
+
+  root.querySelectorAll(".copy-btn").forEach(btn => {
+    btn.addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(btn.dataset.copy);
+        btn.textContent = "คัดลอกแล้ว"; btn.classList.add("done");
+        setTimeout(()=>{btn.textContent="คัดลอก";btn.classList.remove("done");},1600);
+      }catch(e){ alert("ไม่สามารถคัดลอกไปยังคลิปบอร์ดได้"); }
+    });
+  });
+}
+
+function filterSpec(specId, chip){
+  document.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+  chip.classList.add("active");
+  document.querySelectorAll(".spec-section").forEach(sec=>{
+    sec.style.display = (!specId || sec.dataset.spec === specId) ? "" : "none";
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* ---------- แบ่งปันคำถามและข้อเสนอแนะ (Email) ---------- */
+const CONTACT_MAIL = "jiseong.kim@wolterskluwer.com";
+
+function openMail(subject, body){
+  const href = "mailto:" + CONTACT_MAIL +
+    "?subject=" + encodeURIComponent(subject) +
+    "&body=" + encodeURIComponent(body);
+  window.location.href = href;
+}
+
+function setupShare(){
+  document.getElementById("sharePromptBtn").addEventListener("click", e => {
+    e.preventDefault();
+    openMail(
+      "[UpToDate Expert AI] แบ่งปันคำถาม",
+      "สาขา:\n\n" +
+      "สถานการณ์ทางคลินิก (โปรดไม่ระบุข้อมูลที่สามารถระบุตัวผู้ป่วยได้):\n\n\n" +
+      "คำถามที่ป้อน:\n\n\n" +
+      "เคล็ดลับการใช้งาน / ความคิดเห็น:\n\n\n" +
+      "─────────────\nหน่วยงาน / ชื่อ:\n"
+    );
+  });
+
+  document.getElementById("feedbackBtn").addEventListener("click", e => {
+    e.preventDefault();
+    openMail(
+      "[UpToDate Expert AI] ข้อเสนอแนะ",
+      "ข้อเสนอแนะ:\n\n\n" +
+      "สาขาหรือฟังก์ชันที่เกี่ยวข้อง:\n\n\n" +
+      "─────────────\nหน่วยงาน / ชื่อ:\n"
+    );
+  });
+
+  const copyBtn = document.getElementById("copyMail");
+  copyBtn.addEventListener("click", async () => {
+    try{
+      await navigator.clipboard.writeText(CONTACT_MAIL);
+      const orig = copyBtn.textContent;
+      copyBtn.textContent = "คัดลอกที่อยู่อีเมลแล้ว";
+      copyBtn.classList.add("done");
+      setTimeout(()=>{ copyBtn.textContent = orig; copyBtn.classList.remove("done"); }, 1800);
+    }catch(err){ window.location.href = "mailto:" + CONTACT_MAIL; }
+  });
+}
+
+/* ---------- Admin ---------- */
+const modal = document.getElementById("adminModal");
+const statusBox = document.getElementById("adminStatus");
+
+document.getElementById("adminOpen").onclick = () => {
+  if(!DATA) return;
+  PENDING = JSON.parse(JSON.stringify(DATA));
+  FILE_SHA = null;
+  statusBox.className = "status";
+  fillSpecSelect(); fillManageList(); resetQRows();
+  document.getElementById("caseVignette").value = "";
+  document.getElementById("caseNote").value = "";
+  document.getElementById("specName").value = "";
+  modal.classList.add("open");
+};
+document.getElementById("adminClose").onclick = () => {
+  modal.classList.remove("open");
+  document.getElementById("ghToken").value = "";
+};
+modal.addEventListener("click", e => { if(e.target === modal) document.getElementById("adminClose").click(); });
+
+document.querySelectorAll(".tab").forEach(tab=>{
+  tab.onclick = () => {
+    document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+    document.querySelectorAll(".tabpane").forEach(p=>p.classList.remove("active"));
+    tab.classList.add("active");
+    document.getElementById("pane-" + tab.dataset.tab).classList.add("active");
+  };
+});
+
+function fillSpecSelect(){
+  const sel = document.getElementById("caseSpec");
+  sel.innerHTML = "";
+  PENDING.specialties.forEach(s=>{
+    const o = document.createElement("option");
+    o.value = s.id; o.textContent = s.name; sel.appendChild(o);
+  });
+}
+
+function resetQRows(){
+  const box = document.getElementById("qRows");
+  box.innerHTML = "";
+  addQRow("คำถาม",""); addQRow("คำถามต่อเนื่อง","");
+}
+function addQRow(label, text){
+  const box = document.getElementById("qRows");
+  const row = document.createElement("div");
+  row.className = "q-row";
+  row.innerHTML = '<input type="text" class="q-label" value="' + esc(label) + '" placeholder="ชื่อกำกับ">' +
+                  '<input type="text" class="q-text" value="' + esc(text) + '" placeholder="ข้อความคำถาม">';
+  box.appendChild(row);
+}
+document.getElementById("addQRow").onclick = () => addQRow("คำถามต่อเนื่อง","");
+
+function fillManageList(){
+  const box = document.getElementById("manageList");
+  box.innerHTML = "";
+  PENDING.cases.forEach((c, idx)=>{
+    const spec = PENDING.specialties.find(s=>s.id===c.specialtyId);
+    const row = document.createElement("div");
+    row.className = "manage-row";
+    row.innerHTML = '<span class="v"><b>' + esc(spec ? spec.name : c.specialtyId) + '</b> · ' +
+      esc(c.vignette.slice(0,50)) + '…</span>';
+    const del = document.createElement("button");
+    del.className = "del-btn"; del.textContent = "ลบ";
+    del.onclick = () => { PENDING.cases.splice(idx,1); fillManageList(); };
+    row.appendChild(del);
+    box.appendChild(row);
+  });
+  if(!PENDING.cases.length) box.innerHTML = '<div class="manage-row">ยังไม่มีกรณีศึกษา</div>';
+}
+
+function showStatus(kind, msg){
+  statusBox.className = "status " + kind;
+  statusBox.textContent = msg;
+}
+
+document.getElementById("adminSave").onclick = async () => {
+  if(SAVING) return;
+  const token = document.getElementById("ghToken").value.trim();
+  if(!token){ showStatus("err","โปรดป้อนโทเค็น GitHub"); return; }
+  if(!CONFIG.owner || !CONFIG.repo){ showStatus("err","ไม่สามารถระบุที่เก็บโค้ดได้ โปรดระบุ owner/repo ใน CONFIG ของ index.html"); return; }
+
+  const candidate = JSON.parse(JSON.stringify(PENDING));
+
+  // New specialty
+  const specName = document.getElementById("specName").value.trim();
+  let addedSpecId = null;
+  if(specName && !candidate.specialties.some(s=>s.name===specName)){
+    const id = "spec-" + Date.now().toString(36);
+    candidate.specialties.push({id, name:specName});
+    addedSpecId = id;
+  }
+
+  // New case
+  const vignette = document.getElementById("caseVignette").value.trim();
+  if(vignette){
+    const questions = [];
+    document.querySelectorAll("#qRows .q-row").forEach(row=>{
+      const label = row.querySelector(".q-label").value.trim();
+      const text  = row.querySelector(".q-text").value.trim();
+      if(label && text) questions.push({label, text});
+    });
+    if(!questions.length){ showStatus("err","โปรดป้อนคำถามอย่างน้อยหนึ่งข้อสำหรับกรณีศึกษานี้"); return; }
+    const note = document.getElementById("caseNote").value.trim();
+    const entry = { specialtyId: addedSpecId || document.getElementById("caseSpec").value, vignette, questions };
+    if(note) entry.note = note;
+    candidate.cases.push(entry);
+  }
+
+  SAVING = true;
+  document.getElementById("adminSave").disabled = true;
+  showStatus("ok","กำลังบันทึก…");
+  try{
+    const url = API + "/repos/" + CONFIG.owner + "/" + CONFIG.repo + "/contents/" + CONFIG.casesPath;
+    const headers = { "Authorization": "Bearer " + token, "Accept": "application/vnd.github+json" };
+
+    const cur = await fetch(url + "?ref=" + CONFIG.branch, {headers});
+    if(cur.ok) FILE_SHA = (await cur.json()).sha;
+    else if(cur.status !== 404) throw new Error("ไม่สามารถดึงไฟล์ได้ (" + cur.status + ")");
+
+    const json = JSON.stringify(candidate, null, 2);
+    const b64 = btoa(Array.from(new TextEncoder().encode(json), byte => String.fromCharCode(byte)).join(""));
+
+    const put = await fetch(url, {
+      method:"PUT", headers,
+      body: JSON.stringify({
+        message: "chore: update cases via admin panel",
+        content: b64, branch: CONFIG.branch,
+        ...(FILE_SHA ? {sha: FILE_SHA} : {})
+      })
+    });
+    if(!put.ok){
+      const err = await put.json().catch(()=>({}));
+      throw new Error("บันทึกไม่สำเร็จ (" + put.status + ") " + (err.message||""));
+    }
+    DATA = candidate;
+    PENDING = JSON.parse(JSON.stringify(candidate));
+    renderAll();
+    showStatus("ok","บันทึกแล้ว การเปลี่ยนแปลงอาจใช้เวลา 1–2 นาทีจึงจะแสดงบน GitHub Pages");
+    document.getElementById("caseVignette").value = "";
+    document.getElementById("caseNote").value = "";
+    document.getElementById("specName").value = "";
+    resetQRows(); fillSpecSelect(); fillManageList();
+  }catch(e){
+    showStatus("err", e.message || "บันทึกไม่สำเร็จ โปรดตรวจสอบสิทธิ์ของโทเค็น (Contents: Read & Write)");
+  } finally {
+    SAVING = false;
+    document.getElementById("adminSave").disabled = false;
+  }
+};
+
+/* ---------- init ---------- */
+loadData();
+setupShare();
+</script>
+<!-- Cloudflare Web Analytics -->
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"227d8ae2150b4b18ae5cc87f0af68ea8"}'></script>
+<!-- End Cloudflare Web Analytics -->
+</body>
+</html>
+
+
