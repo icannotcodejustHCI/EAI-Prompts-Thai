@@ -103,15 +103,16 @@ main{max-width:1060px;margin:0 auto;padding:12px 24px 40px}
 .btn-ghost{background:var(--white);color:var(--blue);border-color:var(--line)}
 .btn-ghost:hover{border-color:var(--blue);text-decoration:none}
 .share-note{margin-top:18px;font-size:.83rem;color:#8A94A2;max-width:38em;line-height:1.7}
-.nb{white-space:nowrap}
-.linklike{background:none;border:none;padding:0;font-size:inherit;font-family:inherit;color:#6B7684;font-weight:600;text-decoration:underline;text-underline-offset:2px;text-decoration-color:#C4CBD4}
+.nb{white-space:normal}
+.linklike{max-width:100%;white-space:normal;overflow-wrap:anywhere;text-align:left;background:none;border:none;padding:0;font-size:inherit;font-family:inherit;color:#6B7684;font-weight:600;text-decoration:underline;text-underline-offset:2px;text-decoration-color:#C4CBD4}
 .linklike:hover{color:var(--blue);text-decoration-color:var(--blue)}
 .linklike.done{color:var(--ok);text-decoration-color:var(--ok)}
 
 /* ---------- footer / admin ---------- */
 footer{border-top:1px solid var(--line);background:var(--white)}
 .foot-inner{max-width:1060px;margin:0 auto;padding:26px 24px 30px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;font-size:.83rem;color:var(--sub);flex-wrap:wrap}
-.foot-contact p{line-height:1.7}
+.foot-contact{min-width:0;max-width:100%}
+.foot-contact p{line-height:1.7;overflow-wrap:anywhere}
 .foot-label{font-weight:700;color:var(--ink);letter-spacing:.02em;margin-bottom:2px}
 .admin-link{background:none;border:none;color:#8A94A2;font-size:.8rem;text-decoration:underline}
 .admin-link:hover{color:var(--blue)}
@@ -195,7 +196,7 @@ footer{border-top:1px solid var(--line);background:var(--white)}
       <a class="btn btn-primary" id="sharePromptBtn" href="#">แบ่งปันคำถาม</a>
       <a class="btn btn-ghost" id="feedbackBtn" href="#">ส่งข้อเสนอแนะ</a>
     </div>
-    <p class="share-note">หากปุ่มไม่เปิดร่างอีเมล โปรดส่งอีเมลไปที่ <span class="nb"><button class="linklike" id="copyMail">jiseong.kim@wolterskluwer.com</button></span>.</p>
+    <p class="share-note">หากปุ่มไม่เปิดร่างอีเมล โปรดส่งอีเมลไปที่ <span class="nb"><button class="linklike" id="copyMail">Thanwanan.Wanichapornprakhan@wolterskluwer.com</button></span>.</p>
   </div>
 </section>
 
@@ -203,8 +204,8 @@ footer{border-top:1px solid var(--line);background:var(--white)}
   <div class="foot-inner">
     <div class="foot-contact">
       <p class="foot-label">ติดต่อ</p>
-      <p>Jiseong Kim, Wolters Kluwer ประเทศเกาหลี</p>
-      <p>อีเมล : <a href="mailto:jiseong.kim@wolterskluwer.com">jiseong.kim@wolterskluwer.com</a></p>
+      <p>Thanwanan Wanichapornprakhan, Wolters Kluwer</p>
+      <p>อีเมล : <a href="mailto:Thanwanan.Wanichapornprakhan@wolterskluwer.com">Thanwanan.Wanichapornprakhan@wolterskluwer.com</a></p>
     </div>
     <button class="admin-link" id="adminOpen">ผู้ดูแลระบบ</button>
   </div>
@@ -377,7 +378,7 @@ function filterSpec(specId, chip){
 }
 
 /* ---------- แบ่งปันคำถามและข้อเสนอแนะ (Email) ---------- */
-const CONTACT_MAIL = "jiseong.kim@wolterskluwer.com";
+const CONTACT_MAIL = "Thanwanan.Wanichapornprakhan@wolterskluwer.com";
 
 function openMail(subject, body){
   const href = "mailto:" + CONTACT_MAIL +
